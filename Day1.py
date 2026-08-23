@@ -240,3 +240,18 @@ print(DICT.items()) # dict_items([('name', 'ALPHA'), ('age', 25), ('city', 'Kara
 print(DICT.pop("age")) # 25
 print(DICT) # {'name': 'ALPHA', 'city': 'Karachi'}
 
+DICT.update({"age": 25, "country": "Pakistan"}) # adds or updates key-value pairs
+print(DICT)
+
+DICT.setdefault("language", "Python") # adds the key only if it does not exist
+print(DICT)
+
+removed_item = DICT.popitem() # removes and returns the last key-value pair
+print(removed_item)
+
+DICT_copy = DICT.copy() # creates a copy of the dictionary
+print(DICT_copy)
+
+DICT.clear() # removes all key-value pairs
+print(DICT) # {}
+
