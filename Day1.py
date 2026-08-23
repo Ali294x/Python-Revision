@@ -64,13 +64,86 @@ else:
 #for loop
 for i in range(5):
     print(f"Iteration {i+1}")
+    
 
+Name ="Alpha Aplha"
+for x in Name:
+    print(x)
+    
+for i in range(1,10):
+    print(i)
+for i in range(1,10,2):
+    print(i)
+for i in range(1,10,3):
+    print(i)
+for i in range(1,10):
+    if i%2=0 # even numbers
+    print(i)          
+for i in range(1,10):
+    if i%2=1 # Odd numbers
+    print(i)     
+    
+for i in range(1, 11):
+    if i==5:
+        continue
+    print(i)
+print("----------")
+
+# Python supports the following control statements:
+# 1. break statement: Terminates the loop statement and transfers execution to the statement 
+# immediately following the loop.
+for i in range(1, 11):
+    if i==5:
+        break
+    print(i)
+print("----------")    
 #while loop
 count = 0
 while count < 5:
     print(f"Count is: {count}")
     count += 1
-    
+#Exercise:
+#Q1. Print Numbers
+for i in range(1, 50):
+    print (i)
+print("----------") 
+
+# Q2. Even Numbers  
+for i in range(1,100):
+    if  i%2==0:
+        print(i, "is even.")
+print("----------") 
+
+#Q3. Sum of Numbers
+num=int(input("Enter a number: "))
+print("The sum of numbers from 1 to", num, "is:", sum(range(1, num+1)))
+print("----------") 
+
+#Q4. Multiplication Table
+num=int(input("Enter a number: "))
+for i in range(1, 11):
+    print(num, "x", i, "=", num*i)
+print("----------") 
+
+# Q5. Count Even and Odd
+even_count=0
+odd_count=0
+for i in range(1,100):
+    if i%2==0:
+        even_count+=1
+    else:
+        odd_count+=1
+print("Even numbers:", even_count)
+print("Odd numbers:", odd_count)
+print("----------") 
+
+#Q6. Factorial
+num=int(input("Enter a number: "))
+factorial=1  
+for i in range(1, num+1):
+    factorial*=i
+print("The factorial of", num, "is:", factorial)
+print("----------")     
 #list
 fruits = ["apple", "banana", "mango"]
 
@@ -145,7 +218,7 @@ print(tuble * 2) # (1, 2, 3, 4, 5, 1, 2, 3, 4, 5)
 my_set = {1, 2, 3, 4, 5, 4}#removing duplicates
 print(my_set) # {1, 2, 3, 4, 5}
 my_set2 = {2,3,5,5,2,5,7,8}
-pri
+
 
 
 
