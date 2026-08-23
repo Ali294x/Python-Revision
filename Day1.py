@@ -134,7 +134,13 @@ print(tuble.count(2)) # 1
 print(tuble[1:4]) # (2, 3, 4)
 print(tuble[-1]) # 5
 print(tuble.count(6)) # 0
-print(tble + (6, 7, 8)) # (1, 2, 3, 4, 5, 6, 7, 8)
+print(tuble + (6, 7, 8)) # (1, 2, 3, 4, 5, 6, 7, 8)
+#tuble methods
+tuble2 = (6, 7, 8)
+print(tuble + tuble2) # (1, 2, 3, 4, 5, 6, 7, 8)
+print(tuble * 2) # (1, 2, 3, 4, 5, 1, 2, 3, 4, 5)
+
+
 
 
 
