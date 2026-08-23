@@ -227,8 +227,16 @@ my_set.add(6)
 print(my_set) # {1, 2, 3, 4, 5, 6}
 my_set.remove(2)
 
+#DICTIONARY
+DICT = {"name": "AlPHA",
+        "age": 25, 
+        "city": "Karachi"}
 
-
-
-
+print(DICT["name"]) # ALPHA
+print(DICT.get("age")) # 25
+print(DICT.keys()) # dict_keys(['name', 'age', 'city'])
+print(DICT.values()) # dict_values(['ALPHA', 25, 'Karachi'])
+print(DICT.items()) # dict_items([('name', 'ALPHA'), ('age', 25), ('city', 'Karachi')])
+print(DICT.pop("age")) # 25
+print(DICT) # {'name': 'ALPHA', 'city': 'Karachi'}
 
