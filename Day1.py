@@ -227,8 +227,57 @@ my_set.add(6)
 print(my_set) # {1, 2, 3, 4, 5, 6}
 my_set.remove(2)
 
+# Dictionaries
+# Dictionaries store data as key-value pairs.
+student = {
+    "name": "Alpha",
+    "age": 30,
+    "is_student": True
+}
 
+print(student) # prints the complete dictionary
+print(student["name"]) # accesses a value using its key
+print(student.get("cgpa", "CGPA not found")) # safely accesses a missing key
 
+student["cgpa"] = 3.5 # adds a new key-value pair
+student["age"] = 31 # updates an existing value
+print(student)
 
+student.pop("is_student") # removes a key-value pair
+print(student)
 
+print(student.keys()) # all keys
+print(student.values()) # all values
+print(student.items()) # all key-value pairs
+
+for key, value in student.items():
+    print(f"{key}: {value}")
+
+#DICTIONARY
+DICT = {"name": "AlPHA",
+        "age": 25, 
+        "city": "Karachi"}
+
+print(DICT["name"]) # ALPHA
+print(DICT.get("age")) # 25
+print(DICT.keys()) # dict_keys(['name', 'age', 'city'])
+print(DICT.values()) # dict_values(['ALPHA', 25, 'Karachi'])
+print(DICT.items()) # dict_items([('name', 'ALPHA'), ('age', 25), ('city', 'Karachi')])
+print(DICT.pop("age")) # 25
+print(DICT) # {'name': 'ALPHA', 'city': 'Karachi'}
+
+DICT.update({"age": 25, "country": "Pakistan"}) # adds or updates key-value pairs
+print(DICT)
+
+DICT.setdefault("language", "Python") # adds the key only if it does not exist
+print(DICT)
+
+removed_item = DICT.popitem() # removes and returns the last key-value pair
+print(removed_item)
+
+DICT_copy = DICT.copy() # creates a copy of the dictionary
+print(DICT_copy)
+
+DICT.clear() # removes all key-value pairs
+print(DICT) # {}
 
