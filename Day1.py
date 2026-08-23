@@ -140,6 +140,12 @@ tuble2 = (6, 7, 8)
 print(tuble + tuble2) # (1, 2, 3, 4, 5, 6, 7, 8)
 print(tuble * 2) # (1, 2, 3, 4, 5, 1, 2, 3, 4, 5)
 
+#Sets
+#set properties ---> no indexing, no duplicates, unordered
+my_set = {1, 2, 3, 4, 5, 4}#removing duplicates
+print(my_set) # {1, 2, 3, 4, 5}
+my_set2 = {2,3,5,5,2,5,7,8}
+pri
 
 
 
