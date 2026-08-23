@@ -109,7 +109,7 @@ print(name.isdigit()) # False
 print(name.startswith("Py")) # True
 print(name.endswith("on")) # True
 print(name.count("o")) # 1
-Print(name.capitalize()) # Python
+print(name.capitalize()) # Python
 print(name.title()) # Python
 print(name.swapcase()) # pYTHON
 print(name.center(20)) # centers the string in 20 spaces
@@ -134,9 +134,9 @@ print(tuble.count(2)) # 1
 print(tuble[1:4]) # (2, 3, 4)
 print(tuble[-1]) # 5
 print(tuble.count(6)) # 0
-<<<<<<< Updated upstream
-print(tble + (6, 7, 8)) # (1, 2, 3, 4, 5, 6, 7, 8)
-=======
+
+print(tuble + (6, 7, 8)) # (1, 2, 3, 4, 5, 6, 7, 8)
+
 print(tuble + (6, 7, 8)) # (1, 2, 3, 4, 5, 6, 7, 8)
 #tuble methods
 tuble2 = (6, 7, 8)
@@ -151,10 +151,9 @@ my_set2 = {2,3,5,5,2,5,7,8}
 my_set.add(6)
 print(my_set) # {1, 2, 3, 4, 5, 6}
 my_set.remove(2)
-my
 
 
->>>>>>> Stashed changes
+
 
 
 
