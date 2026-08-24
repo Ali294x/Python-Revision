@@ -6,6 +6,7 @@ Run this file to review the examples from the three-day Python revision plan.
 from datetime import datetime
 from functools import reduce
 import math
+import random
 
 
 # Functions
@@ -138,8 +139,59 @@ print(f"Square root of 81: {math.sqrt(81)}")
 print(f"Today: {datetime.now().date()}")
 
 
-# Practice exercises
-# 1. Write a function that returns whether a number is prime.
-# 2. Create a Rectangle class with width, height, area(), and perimeter().
-# 3. Use map() to convert a list of Celsius values to Fahrenheit.
-# 4. Import random and build a number-guessing game.
+# Solved practice exercises
+print("\nSOLVED EXERCISES")
+
+# 1. Return whether a number is prime.
+def is_prime(number):
+	if number < 2:
+		return False
+	for divisor in range(2, math.isqrt(number) + 1):
+		if number % divisor == 0:
+			return False
+	return True
+
+
+print(f"Is 17 prime? {is_prime(17)}")
+print(f"Is 20 prime? {is_prime(20)}")
+
+
+# 2. Create a Rectangle class with area and perimeter methods.
+class Rectangle:
+	def __init__(self, width, height):
+		self.width = width
+		self.height = height
+
+	def area(self):
+		return self.width * self.height
+
+	def perimeter(self):
+		return 2 * (self.width + self.height)
+
+
+rectangle = Rectangle(5, 3)
+print(f"Rectangle area: {rectangle.area()}")
+print(f"Rectangle perimeter: {rectangle.perimeter()}")
+
+
+# 3. Convert Celsius values to Fahrenheit with map().
+celsius_values = [0, 20, 37, 100]
+fahrenheit_values = list(map(lambda celsius: (celsius * 9 / 5) + 32, celsius_values))
+print(f"Fahrenheit values: {fahrenheit_values}")
+
+
+# 4. Build a number-guessing game with random.
+def guessing_game(guesses, low=1, high=10):
+	secret_number = random.randint(low, high)
+	for guess in guesses:
+		if guess == secret_number:
+			return f"Correct! The number was {secret_number}."
+		if guess < secret_number:
+			print("Try a higher number.")
+		else:
+			print("Try a lower number.")
+	return f"Game over. The number was {secret_number}."
+
+
+random.seed(7)
+print(guessing_game([3, 8, 6]))
