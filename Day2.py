@@ -195,3 +195,122 @@ def guessing_game(guesses, low=1, high=10):
 
 random.seed(7)
 print(guessing_game([3, 8, 6]))
+
+
+# Mini project: Hair Salon Appointment Booking
+print("\nHAIR SALON APPOINTMENT BOOKING")
+
+
+class SalonService(ABC):
+	"""Abstraction for every service offered by the salon."""
+
+	def __init__(self, name, price, duration_minutes):
+		self.name = name
+		self.price = price
+		self.duration_minutes = duration_minutes
+
+	@abstractmethod
+	def description(self):
+		pass
+
+
+class Haircut(SalonService):
+	def __init__(self, style, price, duration_minutes=45):
+		super().__init__(f"{style} haircut", price, duration_minutes)
+		self.style = style
+
+	def description(self):
+		return f"{self.style} haircut - ${self.price:.2f}, {self.duration_minutes} minutes"
+
+
+class HairColor(SalonService):
+	def __init__(self, color, price, duration_minutes=90):
+		super().__init__(f"{color} hair color", price, duration_minutes)
+		self.color = color
+
+	def description(self):
+		return f"{self.color} hair color - ${self.price:.2f}, {self.duration_minutes} minutes"
+
+
+class Customer:
+	def __init__(self, name, phone):
+		self.name = name
+		self.phone = phone
+
+
+class Stylist:
+	def __init__(self, name, specialty):
+		self.name = name
+		self.specialty = specialty
+
+
+class Appointment:
+	def __init__(self, customer, stylist, service, appointment_time):
+		self.customer = customer
+		self.stylist = stylist
+		self.service = service
+		self.appointment_time = appointment_time
+		self.__status = "Booked"  # Encapsulation: status is changed through methods.
+
+	@property
+	def status(self):
+		return self.__status
+
+	def cancel(self):
+		if self.__status == "Completed":
+			raise ValueError("A completed appointment cannot be cancelled")
+		self.__status = "Cancelled"
+
+	def complete(self):
+		if self.__status != "Booked":
+			raise ValueError("Only booked appointments can be completed")
+		self.__status = "Completed"
+
+	def summary(self):
+		return (
+			f"{self.appointment_time:%Y-%m-%d %H:%M} | "
+			f"{self.customer.name} with {self.stylist.name} | "
+			f"{self.service.description()} | {self.status}"
+		)
+
+
+class Salon:
+	def __init__(self, name):
+		self.name = name
+		self.__appointments = []
+
+	def book_appointment(self, customer, stylist, service, appointment_time):
+		if appointment_time <= datetime.now():
+			raise ValueError("Appointment time must be in the future")
+		for appointment in self.__appointments:
+			if (
+				appointment.stylist is stylist
+				and appointment.appointment_time == appointment_time
+				and appointment.status == "Booked"
+			):
+				raise ValueError("This stylist is already booked at that time")
+		new_appointment = Appointment(customer, stylist, service, appointment_time)
+		self.__appointments.append(new_appointment)
+		return new_appointment
+
+	def list_appointments(self):
+		return tuple(self.__appointments)
+
+
+salon = Salon("Fresh Look Salon")
+customer = Customer("Ali", "555-0100")
+stylist = Stylist("Sara", "Modern cuts")
+selected_service = Haircut("Textured crop", 30)
+
+appointment = salon.book_appointment(
+	customer,
+	stylist,
+	selected_service,
+	datetime(2099, 8, 24, 14, 30),
+)
+print(appointment.summary())
+print(f"Appointments stored: {len(salon.list_appointments())}")
+
+# Polymorphism: both service types use the same description() interface.
+for service in (Haircut("Buzz cut", 20), HairColor("Brown", 50)):
+	print(service.description())
