@@ -314,3 +314,129 @@ print(f"Appointments stored: {len(salon.list_appointments())}")
 # Polymorphism: both service types use the same description() interface.
 for service in (Haircut("Buzz cut", 20), HairColor("Brown", 50)):
 	print(service.description())
+
+
+# Mini project: ATM Machine
+print("\nATM MACHINE")
+
+
+class Account(ABC):
+	"""Abstract base class for ATM accounts."""
+
+	def __init__(self, account_number, owner, pin, balance=0):
+		self.account_number = account_number
+		self.owner = owner
+		self.__pin = str(pin)
+		self.__balance = balance
+		self.__transactions = []
+
+	def verify_pin(self, pin):
+		return self.__pin == str(pin)
+
+	@property
+	def balance(self):
+		return self.__balance
+
+	def deposit(self, amount):
+		if amount <= 0:
+			raise ValueError("Deposit must be positive")
+		self.__balance += amount
+		self.__transactions.append(f"Deposit: +${amount:.2f}")
+
+	def withdraw(self, amount):
+		if amount <= 0:
+			raise ValueError("Withdrawal must be positive")
+		if amount > self.available_balance():
+			raise ValueError("Insufficient funds")
+		self.__balance -= amount
+		self.__transactions.append(f"Withdrawal: -${amount:.2f}")
+
+	@abstractmethod
+	def available_balance(self):
+		pass
+
+	def add_transaction(self, message):
+		self.__transactions.append(message)
+
+	def transaction_history(self):
+		return tuple(self.__transactions)
+
+
+class CurrentAccount(Account):
+	def available_balance(self):
+		return self.balance
+
+
+class SavingsAccount(Account):
+	def __init__(self, account_number, owner, pin, balance=0, minimum_balance=100):
+		super().__init__(account_number, owner, pin, balance)
+		self.minimum_balance = minimum_balance
+
+	def available_balance(self):
+		return self.balance - self.minimum_balance
+
+
+class ATM:
+	def __init__(self, location):
+		self.location = location
+		self.__accounts = {}
+		self.__current_account = None
+
+	def add_account(self, account):
+		self.__accounts[account.account_number] = account
+
+	def login(self, account_number, pin):
+		account = self.__accounts.get(account_number)
+		if account is None or not account.verify_pin(pin):
+			raise ValueError("Invalid account number or PIN")
+		self.__current_account = account
+		return f"Welcome, {account.owner}!"
+
+	def logout(self):
+		self.__current_account = None
+
+	def current_balance(self):
+		self._require_login()
+		return self.__current_account.balance
+
+	def deposit(self, amount):
+		self._require_login()
+		self.__current_account.deposit(amount)
+
+	def withdraw(self, amount):
+		self._require_login()
+		self.__current_account.withdraw(amount)
+
+	def transfer(self, recipient_number, amount):
+		self._require_login()
+		recipient = self.__accounts.get(recipient_number)
+		if recipient is None:
+			raise ValueError("Recipient account not found")
+		self.__current_account.withdraw(amount)
+		recipient.deposit(amount)
+		self.__current_account.add_transaction(
+			f"Transfer to {recipient.account_number}: -${amount:.2f}"
+		)
+
+	def _require_login(self):
+		if self.__current_account is None:
+			raise PermissionError("Please log in first")
+
+
+atm = ATM("Main Street")
+checking = CurrentAccount("1001", "Ali", "1234", 500)
+savings = SavingsAccount("1002", "Sara", "5678", 1000)
+atm.add_account(checking)
+atm.add_account(savings)
+
+print(atm.login("1001", "1234"))
+atm.deposit(100)
+atm.withdraw(50)
+atm.transfer("1002", 100)
+print(f"Checking balance: ${atm.current_balance():.2f}")
+print(f"Checking history: {checking.transaction_history()}")
+atm.logout()
+
+# Polymorphism: both account types provide available_balance().
+for account in (checking, savings):
+	print(f"{account.owner}'s available balance: ${account.available_balance():.2f}")
