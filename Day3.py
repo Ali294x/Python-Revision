@@ -7,7 +7,7 @@ from pathlib import Path
 import csv
 import json
 
-base_dir = Path(__file__).resolve().parent if "__file__" in globals() else Path.cwd()
+base_dir = Path.home() / "PythonRevisionDay3Data"
 base_dir.mkdir(parents=True, exist_ok=True)
 
 # Exception Handling
