@@ -326,14 +326,14 @@ class Account(ABC):
 	def __init__(self, account_number, owner, pin, balance=0):
 		self.account_number = account_number
 		self.owner = owner
-		self.__pin = str(pin)
-		self.__balance = balance
-		self.__transactions = []
+		self.__pin = str(pin)#private attribute for security "pin"
+		self.__balance = balance#prinvate attribute for security "balance"
+		self.__transactions = []#private attribute for security "transactions"
 
 	def verify_pin(self, pin):
 		return self.__pin == str(pin)
 
-	@property
+	@property  #USE FOR GETTING THE BALANCE
 	def balance(self):
 		return self.__balance
 
@@ -362,7 +362,7 @@ class Account(ABC):
 		return tuple(self.__transactions)
 
 
-class CurrentAccount(Account):
+class CurrentAccount(Account):#INHERITANCE FROM ACCOUNT CLASS
 	def available_balance(self):
 		return self.balance
 
